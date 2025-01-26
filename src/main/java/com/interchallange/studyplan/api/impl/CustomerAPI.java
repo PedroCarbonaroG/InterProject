@@ -23,7 +23,8 @@ public class CustomerAPI implements ICustomerAPI {
     public PageResponse<CustomerResponse> listAll(PageRequestDTO pageRequest) {
 
         log.info("List all | Listing all customers in database");
-        var pageCostumer = customerService.listAll(PageRequest.of(pageRequest.getPageNumber(), pageRequest.getPageSize(), Sort.by(pageRequest.getSort())));
+        var pageCostumer = customerService.listAll(PageRequest.of(pageRequest.pageNumber(), pageRequest.pageSize(), Sort.by(pageRequest.sort())));
+
         return ICustomerMapper.INSTANCE.toPageResponseCustomerResponse(pageCostumer);
     }
 

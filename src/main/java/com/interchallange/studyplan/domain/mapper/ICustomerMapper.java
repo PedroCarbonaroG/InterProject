@@ -1,5 +1,6 @@
 package com.interchallange.studyplan.domain.mapper;
 
+import com.interchallange.studyplan.api.request.CustomerRequest;
 import com.interchallange.studyplan.api.response.PageResponse;
 import com.interchallange.studyplan.api.response.customer.CustomerResponse;
 import com.interchallange.studyplan.domain.entity.Customer;
@@ -12,6 +13,10 @@ import org.springframework.data.domain.Page;
 public interface ICustomerMapper {
 
     ICustomerMapper INSTANCE = Mappers.getMapper(ICustomerMapper.class);
+
+    Customer toCustomer(CustomerRequest customerRequest);
+
+    CustomerResponse toCustomerResponse(Customer customer);
 
     @Mapping(source = "pageCustomer.pageable.pageNumber", target = "pageNumber")
     @Mapping(source = "pageCustomer.pageable.pageSize", target = "pageSize")

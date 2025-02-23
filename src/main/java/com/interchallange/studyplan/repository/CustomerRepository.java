@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -14,8 +15,19 @@ public class CustomerRepository extends BaseRepository {
 
     private final ICustomerRepository repository;
 
-    public Page<Customer> listAll(Pageable pageRequest) {
-        return toPage(new Query(), pageRequest, Customer.class);
+    private static final String NAME_FIELD = "name";
+
+    public Page<Customer> listAll(String filterByName, Pageable pageRequest) {
+
+        Query query = new Query();
+
+        addParamToQuery(query, NAME_FIELD, filterByName);
+
+        return toPage(query, pageRequest, Customer.class);
+    }
+
+    public Customer save(Customer customer) {
+        return repository.save(customer);
     }
 
     public void saveAll(List<Customer> customers) {
@@ -24,6 +36,22 @@ public class CustomerRepository extends BaseRepository {
 
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    public void delete(String email) {
+        repository.deleteByEmail(email);
+    }
+
+    public Customer findById(String id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public Customer findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    public Customer update(Customer customer) {
+        return save(customer);
     }
 
 }

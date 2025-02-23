@@ -13,5 +13,5 @@ import java.lang.annotation.RetentionPolicy;
                 @ApiResponse(
                         responseCode = "200",
                         description = "If everything went right, returns OK.")})
-public @interface ListAllRouteDescription {
+public @interface ListAllCustomerRouteDescription {
 }

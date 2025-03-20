@@ -3,6 +3,7 @@ package com.interchallange.studyplan.repository;
 import com.interchallange.studyplan.domain.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -11,12 +12,30 @@ public class OrderRepository extends BaseRepository {
 
     private final IOrderRepository repository;
 
-    public List<Order> findOrdersByCustomerEmail(String email) {
-        return repository.findByCustomerEmail(email);
+    private static final String CUSTOMER_ID = "customerId";
+
+    public Order findById(String id) {
+        return repository.findById(id).get();
+    }
+
+    public List<Order> findByCustomerId(String id) {
+        return repository.findByCustomerId(id);
+    }
+
+    public List<Order> listAllOrdersByCustomer(String customerId) {
+        return repository.findByCustomerId(customerId);
     }
 
     public Order save(Order order) {
         return repository.save(order);
+    }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    public void saveAll(Iterable<Order> orders) {
+        repository.saveAll(orders);
     }
 
 }

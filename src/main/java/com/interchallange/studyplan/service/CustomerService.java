@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -29,9 +28,9 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
-    public void delete(String email) {
+    public void delete(String id) {
 
-        if (Objects.isNull(orderService.findOrdersByCustomerEmail(email))) { customerRepository.delete(email); }
+        if (Objects.isNull(orderService.findByCustomerId(id))) { customerRepository.delete(id); }
         else { throw new RuntimeException("This customer has orders so can't be deleted"); }
     }
 

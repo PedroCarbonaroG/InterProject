@@ -1,6 +1,6 @@
 package com.interchallange.studyplan.domain.mapper;
 
-import com.interchallange.studyplan.api.request.CustomerRequest;
+import com.interchallange.studyplan.api.request.customer.CustomerRequest;
 import com.interchallange.studyplan.api.response.PageResponse;
 import com.interchallange.studyplan.api.response.customer.CustomerResponse;
 import com.interchallange.studyplan.domain.entity.Customer;

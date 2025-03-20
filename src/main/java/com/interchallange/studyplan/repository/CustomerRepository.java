@@ -26,6 +26,10 @@ public class CustomerRepository extends BaseRepository {
         return toPage(query, pageRequest, Customer.class);
     }
 
+    public List<Customer> listAll() {
+        return repository.findAll();
+    }
+
     public Customer save(Customer customer) {
         return repository.save(customer);
     }

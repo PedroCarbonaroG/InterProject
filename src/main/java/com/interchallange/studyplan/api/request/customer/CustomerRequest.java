@@ -1,4 +1,4 @@
-package com.interchallange.studyplan.api.request;
+package com.interchallange.studyplan.api.request.customer;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

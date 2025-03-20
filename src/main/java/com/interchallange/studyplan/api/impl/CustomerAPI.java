@@ -1,7 +1,7 @@
 package com.interchallange.studyplan.api.impl;
 
 import com.interchallange.studyplan.api.ICustomerAPI;
-import com.interchallange.studyplan.api.request.CustomerRequest;
+import com.interchallange.studyplan.api.request.customer.CustomerRequest;
 import com.interchallange.studyplan.api.response.PageResponse;
 import com.interchallange.studyplan.api.response.customer.CustomerResponse;
 import com.interchallange.studyplan.domain.mapper.ICustomerMapper;
@@ -57,10 +57,10 @@ public class CustomerAPI implements ICustomerAPI {
     }
 
     @Override
-    public void delete(String email) {
+    public void delete(String id) {
 
-        log.info("Delete | Deleting customer by email: {}", email);
-        customerService.delete(email);
+        log.info("Delete | Deleting customer by id: {}", id);
+        customerService.delete(id);
     }
 
 

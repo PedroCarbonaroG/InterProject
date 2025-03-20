@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Order {
     private String id;
 
     @Description("Customer related to the order")
-    private Customer customer;
+    private String customerId;
 
     @Description("Effective date that order was made")
     private LocalDateTime orderDate;
@@ -32,7 +33,7 @@ public class Order {
     private OrderStatus status;
 
     @Description("Order total value")
-    private Double orderValue;
+    private Double totalValue;
 
     @Description("All order products")
     private List<Product> products;

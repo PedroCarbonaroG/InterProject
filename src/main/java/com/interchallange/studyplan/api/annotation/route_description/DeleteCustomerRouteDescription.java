@@ -1,18 +1,25 @@
 package com.interchallange.studyplan.api.annotation.route_description;
 
+import com.interchallange.studyplan.api.exception_handler.response.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-
+import org.springframework.http.MediaType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Operation(
-        summary = "Responsible route to list all customers in database",
-        description = "If everything went right, returns a paginated list of all customers in database",
+        summary = "Responsible route to delete a customer.",
+        description = "If everything went right, deletes the customer from the database.",
         responses = {
                 @ApiResponse(
-                        responseCode = "200",
-                        description = "If everything went right, returns OK.")})
-public @interface DeleteCustomerRouteDescription {
-}
+                        responseCode = "204",
+                        description = "If everything went right, returns no content.",
+                        content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
+                @ApiResponse(
+                        responseCode = "404 • 500",
+                        description = "If something goes wrong with data or application resources, returns treated error.",
+                        content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class)))})
+public @interface DeleteCustomerRouteDescription {}

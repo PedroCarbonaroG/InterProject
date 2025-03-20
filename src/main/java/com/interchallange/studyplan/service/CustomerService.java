@@ -2,6 +2,7 @@ package com.interchallange.studyplan.service;
 
 import com.interchallange.studyplan.domain.entity.Customer;
 import com.interchallange.studyplan.repository.CustomerRepository;
+import com.interchallange.studyplan.service.exception.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -51,7 +52,6 @@ public class CustomerService {
     private void validateNewCustomerFields(Customer customer) {
 
         validateValidEmail(customer.getEmail());
-        validateEmailNonRegistered(customer.getEmail());
 
         if (isFilledField(customer.getPhoneNumber())) {
             validateValidPhoneNumber(customer.getPhoneNumber());
@@ -66,7 +66,6 @@ public class CustomerService {
 
         if (isFilledField(newCustomer.getEmail())) {
             validateValidEmail(newCustomer.getEmail());
-            validateEmailNonRegistered(newCustomer.getEmail());
             customerBuilder.email(newCustomer.getEmail());
         } else {
             customerBuilder.email(originalCustomer.getEmail());
@@ -89,16 +88,12 @@ public class CustomerService {
         return Objects.nonNull(field) && !field.toString().isEmpty();
     }
 
-    private void validateEmailNonRegistered(String email) {
-        if (Objects.nonNull(customerRepository.findByEmail(email))) { throw new RuntimeException("Email already exists in system, try another"); }
-    }
-
     private void validateValidPhoneNumber(String phoneNumber) {
-        if (!(phoneNumber != null && PHONE_PATTERN.matcher(phoneNumber).matches())) { throw new RuntimeException("Invalid phone number, wasn't 11 digits or pattern is wrong"); }
+        if (!(phoneNumber != null && PHONE_PATTERN.matcher(phoneNumber).matches())) { throw new ValidationException("Invalid phone number, wasn't 11 digits or pattern is wrong"); }
     }
 
     private void validateValidEmail(String email) {
-        if (!(email != null && EMAIL_PATTERN.matcher(email).matches())) { throw new RuntimeException("Invalid email, initial email wasn't 7 characters or pattern is wrong"); }
+        if (!(email != null && EMAIL_PATTERN.matcher(email).matches())) { throw new ValidationException("Invalid email, initial email wasn't 7 characters or pattern is wrong"); }
     }
 
 }

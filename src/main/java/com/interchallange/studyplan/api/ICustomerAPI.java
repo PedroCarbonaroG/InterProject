@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Customer API - Customer environment")
+@Tag(name = "Customer environment API")
 @RequestMapping(value = "/customer", produces = MediaType.APPLICATION_JSON_VALUE)
 public interface ICustomerAPI {
 
@@ -21,7 +21,7 @@ public interface ICustomerAPI {
     @PageableAsQueryParam
     @ListAllCustomerRouteDescription
     PageResponse<CustomerResponse> listAll(
-            @Parameter String name,
+            @Parameter(required = false) String name,
             @Parameter(hidden = true) Pageable pageRequest);
 
     @GetMapping("/id")

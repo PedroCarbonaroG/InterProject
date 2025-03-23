@@ -5,6 +5,7 @@ import com.interchallange.studyplan.repository.CustomerRepository;
 import com.interchallange.studyplan.service.exception.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -89,11 +90,15 @@ public class CustomerService {
     }
 
     private void validateValidPhoneNumber(String phoneNumber) {
-        if (!(phoneNumber != null && PHONE_PATTERN.matcher(phoneNumber).matches())) { throw new ValidationException("Invalid phone number, wasn't 11 digits or pattern is wrong"); }
+        if (!(phoneNumber != null && PHONE_PATTERN.matcher(phoneNumber).matches())) {
+            throw new ValidationException("Invalid phone number, wasn't 11 digits or pattern is wrong");
+        }
     }
 
     private void validateValidEmail(String email) {
-        if (!(email != null && EMAIL_PATTERN.matcher(email).matches())) { throw new ValidationException("Invalid email, initial email wasn't 7 characters or pattern is wrong"); }
+        if (!(email != null && EMAIL_PATTERN.matcher(email).matches())) {
+            throw new ValidationException("Invalid email, initial email wasn't 7 characters or pattern is wrong");
+        }
     }
 
 }

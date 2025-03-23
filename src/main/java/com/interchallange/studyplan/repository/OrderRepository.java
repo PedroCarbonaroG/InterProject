@@ -14,6 +14,10 @@ public class OrderRepository extends BaseRepository {
 
     private static final String CUSTOMER_ID = "customerId";
 
+    public Order create(Order order) {
+        return repository.save(order);
+    }
+
     public Order findById(String id) {
         return repository.findById(id).get();
     }

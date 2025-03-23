@@ -13,6 +13,8 @@ public interface IOrderMapper {
 
     IOrderMapper INSTANCE = Mappers.getMapper(IOrderMapper.class);
 
+    OrderResponse toOrderResponse(Order order);
+
     List<OrderResponse> toOrderResponseList(List<Order> orders);
 
     default CustomerOrderResponse toCustomerOrderResponse(CustomerResponse customer, List<OrderResponse> orders) {
